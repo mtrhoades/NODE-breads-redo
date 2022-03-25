@@ -17,9 +17,14 @@ breads.get('/', (req, res) => {
 
 // SHOW (/breads/arrayIndex# read route)
 breads.get('/:arrayIndex', (req, res) => {
-    res.send(Bread[req.params.arrayIndex])
+    if (Bread[req.params.arrayIndex]) {
+      res.render('show', {
+        bread:Bread[req.params.arrayIndex]
+      })
+    } else {
+      res.send('Turn the fuck!.. back around, your lost pal, 404 NOT FOUND')
+    }
 });
-
 
 
 module.exports = breads
