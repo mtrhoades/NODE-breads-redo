@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require('express'); // importing express framework
+const methodOverride = require('method-override');
 
 
 // CONFIGURATION
@@ -12,8 +13,10 @@ const app = express(); // variable for express required above.
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
-app.use(express.static('public')) // gets public folder access for css and images.
-app.use(express.urlencoded({extended: true}))
+app.use(express.static('public')); // gets public folder access for css and images.
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
+
 
 // BREADS_CONTROLLER.JS ROUTE
 const breadsController = require('./controllers/breads_controller.js'); // import breads_controller.js file
