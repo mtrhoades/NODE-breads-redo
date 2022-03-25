@@ -13,6 +13,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 app.use(express.static('public')) // gets public folder access for css and images.
+app.use(express.urlencoded({extended: true}))
 
 // BREADS_CONTROLLER.JS ROUTE
 const breadsController = require('./controllers/breads_controller.js'); // import breads_controller.js file
