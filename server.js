@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 // 404 error page
 app.get("*", (req, res) => {
-    res.send('Turn the fuck!.. back around, your lost pal, 404 NOT FOUND')
+    res.render('error404')
 });
 
 

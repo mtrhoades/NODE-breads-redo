@@ -22,7 +22,7 @@ breads.get('/:arrayIndex', (req, res) => {
         bread:Bread[req.params.arrayIndex]
       })
     } else {
-      res.send('Turn the fuck!.. back around, your lost pal, 404 NOT FOUND')
+      res.render('error404')
     }
 });
 
