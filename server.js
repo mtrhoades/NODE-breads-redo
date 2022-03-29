@@ -17,20 +17,27 @@ app.engine('jsx', require('express-react-views').createEngine());
 app.use(express.static('public')); // gets public folder access for css and images.
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+
+// database connection
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
     () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
 );
-
-
-// BREADS_CONTROLLER.JS ROUTE
-const breadsController = require('./controllers/breads_controller.js'); // import breads_controller.js file
-app.use('/breads', breadsController); // use '/breads' as the path
 
 
 // ROUTES
 app.get('/', (req, res) => {
     res.send('Welcome to an Awesome App about Breads')
 });
+
+
+// BREADS_CONTROLLER.JS ROUTE
+const breadsController = require('./controllers/breads_controller.js'); // import breads_controller.js file
+app.use('/breads', breadsController); // use '/breads' as the path
+
+// BAKERS CONTROLLER ROUTE 
+const bakersController = require('./controllers/bakers_controller.js');
+app.use('/bakers', bakersController);
+
   
 
 // 404 error page
