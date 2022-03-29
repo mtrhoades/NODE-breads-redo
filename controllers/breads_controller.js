@@ -8,15 +8,30 @@ const baker = require('./bakers_controller.js');
 
 // INDEX ROUTE (/breads read route)
 breads.get('/', (req, res) => {
-    Bread.find()
+    Baker.find()
+      .then(foundBakers => {
+        Bread.find()
         .then(foundBreads => {
             res.render('index', {
                 breads: foundBreads,
-                title: 'breadCRUD Index Page'
+                bakers: foundBakers,
+                title: 'Index Page'
             })
-    })
-//   res.send(Bread) // showing the data from the model
-});
+        })
+      })
+  })
+
+// breads.get('/', (req, res) => {
+//     Bread.find()
+//         .then(foundBreads => {
+//             res.render('index', {
+//                 breads: foundBreads,
+//                 title: 'breadCRUD Index Page'
+//             })
+//     })
+// //   res.send(Bread) // showing the data from the model
+// });
+
 
 
 // NEW
