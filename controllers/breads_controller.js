@@ -32,19 +32,25 @@ breads.get('/new', (req, res) => {
 
 // EDIT
 breads.get('/:id/edit', (req, res) => {
-    Bread.findById(req.params.id) 
-      .then(foundBread => { 
-        res.render('edit', {
-          bread: foundBread 
-        })
+    Baker.find()
+      .then(foundBakers => {
+          Bread.findById(req.params.id)
+            .then(foundBread => {
+              res.render('edit', {
+                  bread: foundBread, 
+                  bakers: foundBakers 
+              })
+            })
       })
-});
-// breads.get('/:indexArray/edit', (req, res) => {
+  });
+
+  // breads.get('/:indexArray/edit', (req, res) => {
 //     res.render('edit', {
 //       bread: Bread[req.params.indexArray],
 //       index: req.params.indexArray
 //     })
 // });
+
 
 
 // UPDATE
@@ -94,16 +100,38 @@ breads.post('/', (req, res) => {
 // SHOW (/breads/id# read route)
 breads.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
+        .populate('baker')
         .then(foundBread => {
-            const bakedBy = foundBread.getBakedBy()
-            console.log(bakedBy)
-            res.render('show', {
-                bread: foundBread
-            })
+          res.render('show', {
+              bread: foundBread
+          })
         })
-        .catch((err) => {
-            res.render('error404')
+        .catch(err => {
+          res.render('error404')
         })
+  });
+
+
+
+
+// breads.get('/:id', (req, res) => {
+//     Bread.findById(req.params.id)
+//         .then(foundBread => {
+//             const bakedBy = foundBread.getBakedBy()
+//             console.log(bakedBy)
+//             res.render('show', {
+//                 bread: foundBread
+//             })
+//         })
+//         .catch((err) => {
+//             res.render('error404')
+//         })
+
+
+
+
+
+
     // if (Bread[req.params.arrayIndex]) {
     //   res.render('show', {
     //     bread:Bread[req.params.arrayIndex],
@@ -112,7 +140,7 @@ breads.get('/:id', (req, res) => {
     // } else {
     //   res.render('error404')
     // }
-});
+// });
 
 
 // BREADS DATA/SEED ROUTE

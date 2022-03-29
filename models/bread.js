@@ -7,22 +7,20 @@ const { Schema } = mongoose;
 
 
 // SCHEMA
-// schema
 const breadSchema = new Schema({
   name: { type: String, required: true },
   hasGluten: Boolean,
   image: { type: String, default: 'http://placehold.it/500x500.png' },
   baker: {
-    type: Schema.Types.ObjectID,
+    type: Schema.Types.ObjectId,
     ref: 'Baker'
   }
 });
 
 
-// HELPER METHOD (instance)
-// helper methods 
+// // HELPER METHOD (instance)
 breadSchema.methods.getBakedBy = function(){
-  return `${this.name} was baked with love by ${this.baker}`
+  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
 }
 
 
